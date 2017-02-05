@@ -19,8 +19,4 @@ export class HomeService {
       .map((res:Response) => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server Error'));
   }
-
-  getLanguages() {
-    return [65, 59, 80, 81, 56, 55, 40];
-  }
 }

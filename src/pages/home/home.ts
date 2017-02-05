@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
-import { Observable } from 'rxjs/Observable';
 
 import { HomeService } from './home.service';
 
@@ -19,11 +18,12 @@ export class HomePage {
 
   constructor(public homeService: HomeService) {  }
 
-  ngOnInit() {
+  public username:string;
+
+  onSubmit(user) {
+    this.username = user;
     this.loadLanguages();
   }
-
-  public username:string = 'yesroh';
 
   loadLanguages () {
       this.homeService.getUrl(this.username).subscribe(res => {
@@ -37,8 +37,6 @@ export class HomePage {
 
         this.label = label;
         this.data = data;
-        console.log('label', label)
-        console.log('data', data)
 
         this.lineChart = new Chart(this.lineCanvas.nativeElement, {
           type: 'line',
@@ -70,7 +68,7 @@ export class HomePage {
               ]
           }
       });
-   });
+   }, err => console.log(err));
  }
 
   public label:any = [];
